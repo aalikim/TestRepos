@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+  <!-- UserMapper.xml -->
+  
+  <mapper namespace="com.kosta.mapper.UserMapper" >
+  		<!-- <resultMap type="User" id="UserResultMap"> -->
+  		<resultMap type="com.kosta.dto.UserDTO" id="UserResultMap">
+  			<result property="id"  column="id" />
+  			<result property="name"  column="name" />
+  			<result property="password"  column="password" />
+  		</resultMap>
+  		
+  
+  		<!-- id의 경우 UserMapper.java에 있는 함수명과 동일하게 사용한다. -->
+  		<select id="getUsers"  resultMap="UserResultMap">
+  			<![CDATA[ 
+  				SELECT * FROM USERS
+  			]]>  
+  		</select>
+  		
+  		<insert id="insertUsers" parameterType="com.kosta.dto.UserDTO">
+  			<![CDATA[ 
+  				INSERT INTO USERS VALUES( #{ id } , #{ name } , #{password} )
+  			]]>  
+  		</insert>
+  		
+  		<update id="updateUsers" parameterType="com.kosta.dto.UserDTO">
+  			<![CDATA[ 
+  				UPDATE USERS SET NAME=#{name}, PASSWORD=#{password} where ID=#{id} 
+  			]]>  
+  		</update>
+  		
+  		<delete id="deleteUsers"  parameterType="String">
+  			<![CDATA[ 
+  				DELETE USERS WHERE( id=#{id} )
+  			]]>  
+  		</delete>
+  		
+  </mapper>
+  
+  
+  
+  
